@@ -1,0 +1,28 @@
+<%- include('./head.ejs') %>
+  
+    <% if (todos.length > 0) { %>
+        <div class="card" style="margin-top: 10px;">
+            <ul class="list-group list-group-flush">
+
+                <% for (let todoDoc of todos) { %>
+                <li class="list-group-item"> <%= todoDoc.todo %>
+                    <input type="hidden" value="<%= todoDoc._id %>" name="todoDocId"> 
+                    <button type="button" class="btn btn-primary float-right" onclick="deleteTodos(this)">Delete</button>
+                </li>
+                <!-- <form action="/delete-todo" method="POST" class="float-right">
+                    <input type="hidden" value="<%= todoDoc._id %>" name="todoDocId">
+                    <button type="submit" class="btn btn-primary">Delete</button>
+                </form> -->
+                <% } %>
+    
+        </ul>
+
+        <% } else { %>
+            <h1>Nothing to do</h1>
+        <% } %>      
+    
+        </div>
+    </div>
+  </body>
+</html>
+<script src="/asyncDeleteTodos.js"></script>

@@ -38,4 +38,4 @@ jobs:
       - name: Deploy on App Engine
         run: |
           gcloud config set project ${{ secrets.GCLOUD_PROJECT }}
-          gcloud app deploy app.yaml
+          gcloud -q app deploy app.yaml

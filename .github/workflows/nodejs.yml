@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [10.x, 12.x]
+        node-version: [12.x]
 
     steps:
       - uses: actions/checkout@v2
@@ -38,4 +38,4 @@ jobs:
       - name: Deploy on App Engine
         run: |
           gcloud config set project ${{ secrets.GCLOUD_PROJECT }}
-          gcloud -q app deploy app.yaml --promote
+          gcloud app deploy app.yaml

@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-
+    name: Deploy
     runs-on: ubuntu-latest
 
     strategy:
@@ -19,21 +19,21 @@ jobs:
         node-version: [10.x, 12.x]
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: npm ci
-    - run: npm run build --if-present
-      env:
-        CI: true
-        
-    - name: Authenticate into Google Cloud Platform
-      uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
-      with:
-        service_account_email: ${{ secrets.GCLOUD_EMAIL }}
-        service_account_key: ${{ secrets.GCLOUD_AUTH }}
-      run: |
-        gcloud config set project ${{ secrets.GCLOUD_PROJECT }}
-        gcloud -q app deploy app.yaml --promote
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci
+      - run: npm run build --if-present
+        env:
+          CI: true
+          
+      - name: Authenticate into Google Cloud Platform
+        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with:
+          service_account_email: ${{ secrets.GCLOUD_EMAIL }}
+          service_account_key: ${{ secrets.GCLOUD_AUTH }}
+        run: |
+          gcloud config set project ${{ secrets.GCLOUD_PROJECT }}
+          gcloud -q app deploy app.yaml --promote

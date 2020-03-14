@@ -25,7 +25,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
-      - run: npm install
       - run: npm run build --if-present
         env:
           CI: true
@@ -35,6 +34,9 @@ jobs:
         with:
           service_account_email: ${{ secrets.GCLOUD_EMAIL }}
           service_account_key: ${{ secrets.GCLOUD_AUTH }}
+
+      - name: Pass to Env
+        run: echo ${{ secrets.ENV }} >> app.yaml
 
       - name: Deploy on App Engine
         run: |

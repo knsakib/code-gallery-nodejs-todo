@@ -37,6 +37,7 @@ jobs:
 
       - name: Pass to Env
         run: echo "'${{ secrets.ENV_VAR }}'" >> app.yaml
+        run: cat app.yaml
 
       - name: Deploy on App Engine
         run: |

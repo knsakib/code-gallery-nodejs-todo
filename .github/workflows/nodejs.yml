@@ -34,6 +34,8 @@ jobs:
         with:
           service_account_email: ${{ secrets.GCLOUD_EMAIL }}
           service_account_key: ${{ secrets.GCLOUD_AUTH }}
+
+      - name: Deploy on App Engine
         run: |
           gcloud config set project ${{ secrets.GCLOUD_PROJECT }}
           gcloud -q app deploy app.yaml --promote

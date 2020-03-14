@@ -36,7 +36,7 @@ jobs:
           service_account_key: ${{ secrets.GCLOUD_AUTH }}
 
       - name: Pass to Env
-        run: echo '${{ secrets.ENV_VAR }}' >> app.yaml
+        run: echo "'${{ secrets.ENV_VAR }}'" >> app.yaml
 
       - name: Deploy on App Engine
         run: |
